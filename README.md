@@ -1,70 +1,137 @@
-# Getting Started with Create React App
+# City Pollution Map - README
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+City Pollution Map est une application interactive qui permet de suivre et de visualiser la pollution atmosphérique en temps réel, avec un accent sur la région d'El Jadida au Maroc. Elle fournit des informations sur l'indice de qualité de l'air (AQI), des prévisions sur trois jours, un historique des données, et des notifications en temps réel.
 
-In the project directory, you can run:
+## Objectifs
 
-### `npm start`
+- Visualisation des données de pollution en temps réel.
+- Suivi précis des indices de qualité de l'air (AQI).
+- Prévisions de pollution sur trois jours.
+- Historique des données pour analyse des tendances.
+- Personnalisation avec gestion des villes favorites.
+- Notifications en temps réel en cas de dégradation de la qualité de l'air.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Architecture et Technologies
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Vue d'ensemble
 
-### `npm test`
+L'application suit une architecture modulaire et scalable :
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- *Frontend* : Développé avec React 18 et Material-UI pour des interfaces modernes, Leaflet pour les cartes interactives, SockJS pour WebSockets, et Axios pour les requêtes HTTP.
+- *Backend* : Basé sur Spring Boot 3, avec Spring Security et JWT pour l'authentification, Spring WebSocket pour la communication en temps réel, et Spring Data JPA pour la gestion des données.
+- *Base de données et Cache* : MySQL pour le stockage persistant et Redis pour le cache rapide.
+- *Services externes* : OpenWeatherMap pour les données de pollution, services de géocodage pour la localisation et envoi de notifications.
 
-### `npm run build`
+### Diagramme d'architecture
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Structure Backend
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+plaintext
+src/main/java
+├── com.example.pollution
+│   ├── config
+│   │   ├── SecurityConfig.java
+│   │   ├── WebSocketConfig.java
+│   │   └── CacheConfig.java
+│   ├── controller
+│   │   └── PollutionController.java
+│   ├── dto
+│   │   └── PollutionDTO.java
+│   ├── entity
+│   │   └── PollutionData.java
+│   ├── repository
+│   │   └── PollutionRepository.java
+│   ├── service
+│   │   └── PollutionService.java
+│   └── Application.java
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+#### Structure Frontend
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+plaintext
+src/
+├── components
+│   ├── MapComponent.jsx
+│   ├── Dashboard.jsx
+│   └── NotificationSettings.jsx
+├── services
+│   ├── api.js
+│   └── websocket.js
+├── App.jsx
+├── index.js
+└── styles
+    └── App.css
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Diagramme de classe
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+plaintext
++-----------------+        +-----------------+
+|     User        |        |  PollutionData  |
++-----------------+        +-----------------+
+| - id: Long      |        | - id: Long      |
+| - name: String  |        | - city: String  |
+| - email: String |        | - aqi: Integer  |
+| - preferences   |        | - date: Date    |
++-----------------+        +-----------------+
+        |                        |
+        |                        |
+        +------------------------+
+                  has_many
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Fonctionnalités
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Système d'authentification
+- Utilisation de JWT pour sécuriser les sessions utilisateur.
+- Points d'entrée publics pour l'inscription et la connexion.
+- Sécurisation des routes sensibles avec des règles d'autorisation strictes.
 
-### Code Splitting
+### Visualisation interactive
+- Carte interactive avec Leaflet pour afficher les indices de pollution.
+- Fonctionnalités de recherche, localisation et ajout de favoris.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Notifications en temps réel
+- Intégration des WebSockets avec STOMP pour des alertes instantanées.
+- Filtrage des messages entrants pour prévenir les injections malveillantes.
 
-### Analyzing the Bundle Size
+### Historique et prévisions
+- Données historiques accessibles pour chaque ville.
+- Prévisions sur plusieurs jours.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Modèle de données
 
-### Making a Progressive Web App
+Le modèle de données inclut :
+- Utilisateurs et leurs préférences.
+- Données de pollution et villes favorites.
+- Historique des alertes et configuration des notifications.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Sécurité
 
-### Advanced Configuration
+- *Authentification JWT* : Validation des tokens pour sécuriser les requêtes.
+- *Protection des routes* : Accès réservé aux utilisateurs authentifiés.
+- *Validation des données* : Annotations telles que @NotNull et @Email pour garantir l'intégrité.
+- *Gestion des erreurs* : Gestion centralisée des exceptions avec un GlobalExceptionHandler.
+- *CORS* : Configuration pour permettre les échanges sécurisés entre frontend et backend.
+- *Sécurité des WebSockets* : Contrôle des connexions via JWT et filtrage des messages.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Backend
 
-### Deployment
+- *Architecture* : Suivant une structure en couches claire.
+- *Contrôleurs* : Gestion des points d'entrée API REST.
+- *Services* : Logique métier centralisée.
+- *Repositories* : Interaction avec la base de données.
+- *DTOs* : Transfert des données entre les couches.
+- *Configurations* : Gérer la sécurité, WebSockets, cache, et documentation API.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Frontend
 
-### `npm run build` fails to minify
+- *Architecture modulaire* : Organisation en composants React distincts.
+- *Carte interactive* : Visualisation dynamique et marqueurs détaillés.
+- *Tableau de bord* : Gestion des données en temps réel, historique et favoris.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Conclusion
+
+City Pollution Map offre une solution complète pour la surveillance de la qualité de l'air, en combinant sécurité, performance et facilité d'utilisation. Avec des technologies modernes comme React, Spring Boot, JWT, Redis, et MySQL, elle répond aux besoins des utilisateurs pour une expérience fluide et fiable.
