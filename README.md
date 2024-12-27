@@ -28,7 +28,7 @@ L'application suit une architecture modulaire et scalable :
 
 #### Structure Backend
 
-plaintext
+```plaintext
 src/main/java
 ├── com.example.pollution
 │   ├── config
