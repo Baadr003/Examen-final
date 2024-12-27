@@ -29,40 +29,126 @@ L'application suit une architecture modulaire et scalable :
 #### Structure Backend
 
 ```plaintext
-src/main/java
-├── com.example.pollution
-│   ├── config
-│   │   ├── SecurityConfig.java
-│   │   ├── WebSocketConfig.java
-│   │   └── CacheConfig.java
-│   ├── controller
-│   │   └── PollutionController.java
-│   ├── dto
-│   │   └── PollutionDTO.java
-│   ├── entity
-│   │   └── PollutionData.java
-│   ├── repository
-│   │   └── PollutionRepository.java
-│   ├── service
-│   │   └── PollutionService.java
-│   └── Application.java
-```
-
-#### Structure Frontend
-```
-plaintext
-src/
-├── components
-│   ├── MapComponent.jsx
-│   ├── Dashboard.jsx
-│   └── NotificationSettings.jsx
-├── services
-│   ├── api.js
-│   └── websocket.js
-├── App.jsx
-├── index.js
-└── styles
-    └── App.css
+Directory structure:
+└── Baadr003-Examen-final/
+    ├── public/
+    │   ├── manifest.json
+    │   ├── index.html
+    │   └── robots.txt
+    ├── package.json
+    ├── Exman-1/
+    │   ├── .vscode/
+    │   │   ├── settings.json
+    │   │   └── launch.json
+    │   └── demo/
+    │       ├── mvnw.cmd
+    │       ├── .gitignore
+    │       ├── .gitattributes
+    │       ├── mvnw
+    │       ├── pom.xml
+    │       ├── .mvn/
+    │       │   └── wrapper/
+    │       │       └── maven-wrapper.properties
+    │       └── src/
+    │           └── main/
+    │               ├── resources/
+    │               │   ├── application.properties
+    │               │   ├── ehcache.xml
+    │               │   ├── templates/
+    │               │   │   ├── alert-email.html
+    │               │   │   ├── verification-email.html
+    │               │   │   └── reset-password-email.html
+    │               │   └── message_fr.properties
+    │               └── java/
+    │                   └── com/
+    │                       └── pollu/
+    │                           └── demo/
+    │                               ├── dto/
+    │                               │   ├── UserProfileUpdateDTO.java
+    │                               │   ├── AlertMessage.java
+    │                               │   ├── UserPreferencesDTO.java
+    │                               │   ├── UserDetailsDTO.java
+    │                               │   ├── FavoriteCityDTO.java
+    │                               │   ├── UserDTO.java
+    │                               │   ├── AuthRequestDTO.java
+    │                               │   ├── AuthResponseDTO.java
+    │                               │   ├── PollutionDTO.java
+    │                               │   ├── SimulateAlertRequest.java
+    │                               │   ├── BaseResponseDTO.java
+    │                               │   ├── VerificationDTO.java
+    │                               │   └── PasswordResetDTO.java
+    │                               ├── services/
+    │                               │   ├── EmailService.java
+    │                               │   ├── AlertService.java
+    │                               │   ├── UserService.java
+    │                               │   ├── PollutionService.java
+    │                               │   ├── EmailTestService.java
+    │                               │   └── FavoriteCityService.java
+    │                               ├── repositories/
+    │                               │   ├── FavoriteCityRepository.java
+    │                               │   ├── AlertHistoryRepository.java
+    │                               │   └── UserRepository.java
+    │                               ├── entities/
+    │                               │   ├── AlertHistory.java
+    │                               │   ├── AlertPriority.java
+    │                               │   ├── FavoriteCity.java
+    │                               │   ├── Role.java
+    │                               │   └── User.java
+    │                               ├── controller/
+    │                               │   ├── FavoriteCityController.java
+    │                               │   ├── EmailTestController.java
+    │                               │   ├── AlertController.java
+    │                               │   ├── CacheController.java
+    │                               │   ├── AuthController.java
+    │                               │   └── PollutionController.java
+    │                               ├── DemoApplication.java
+    │                               └── config/
+    │                                   ├── WebSocketConfig.java
+    │                                   ├── SecurityConfig.java
+    │                                   ├── OpenAPIConfig.java
+    │                                   ├── CacheConfig.java
+    │                                   └── EmailConfig.java
+    ├── README.md
+    └── src/
+        ├── setupTests.js
+        ├── services/
+        │   ├── favoriteService.js
+        │   ├── authService.js
+        │   ├── websocketService.js
+        │   └── api.js
+        ├── index.css
+        ├── components/
+        │   ├── ProtectedRoute.js
+        │   ├── CitySearch.js
+        │   ├── Map.js
+        │   ├── EditProfileDialog.js
+        │   ├── auth/
+        │   │   └── AuthPage.js
+        │   ├── PasswordResetDialog.js
+        │   ├── PollutionTabs.js
+        │   ├── UserProfile.js
+        │   ├── layout/
+        │   │   └── MainLayout.js
+        │   ├── FavoritesList.js
+        │   ├── CustomNotification.js
+        │   ├── EmailVerificationDialog.js
+        │   └── NotificationPreferences.js
+        ├── theme.js
+        ├── styles/
+        │   └── global.css
+        ├── App.js
+        ├── reportWebVitals.js
+        ├── pages/
+        │   ├── TestAlerts.js
+        │   └── MainPage.js
+        ├── App.css
+        ├── App.test.js
+        ├── index.js
+        └── utils/
+            ├── authUtils.js
+            ├── aqiUtils.js
+            ├── sessionUtils.js
+            └── constants.js
 
 
 
