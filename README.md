@@ -65,21 +65,18 @@ src/
     └── App.css
 
 
+
+
+
 ### Diagramme de classe
 
-plaintext
-+-----------------+        +-----------------+
-|     User        |        |  PollutionData  |
-+-----------------+        +-----------------+
-| - id: Long      |        | - id: Long      |
-| - name: String  |        | - city: String  |
-| - email: String |        | - aqi: Integer  |
-| - preferences   |        | - date: Date    |
-+-----------------+        +-----------------+
-        |                        |
-        |                        |
-        +------------------------+
-                  has_many
+
+
+
+![image](https://github.com/user-attachments/assets/2701f54b-eaf8-4d81-b1b4-b020595de966)
+
+           
+
 
 
 ## Fonctionnalités
