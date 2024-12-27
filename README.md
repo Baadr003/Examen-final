@@ -26,7 +26,7 @@ L'application suit une architecture modulaire et scalable :
 
 ### Diagramme d'architecture
 
-#### Structure Backend
+#### Structure du projet
 
 ```plaintext
 Directory structure:
