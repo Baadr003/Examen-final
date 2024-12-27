@@ -46,10 +46,10 @@ src/main/java
 │   ├── service
 │   │   └── PollutionService.java
 │   └── Application.java
-
+```
 
 #### Structure Frontend
-
+```
 plaintext
 src/
 ├── components
